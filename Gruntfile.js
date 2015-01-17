@@ -18,9 +18,17 @@ module.exports = function(grunt) {
         src: ['<%= concat.dist.dest %>'],
         dest: 'dist/<%= pkg.name %>-<%= pkg.version %>.min.js'
       }
+    },
+    jasmine: {
+      src: 'lib/**/*.js',
+      options: {
+        specs: 'test/*.spec.js',
+      }
     }
   });
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.registerTask('default', ['concat', 'uglify']);
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.registerTask('test', ['jasmine']);
+  grunt.registerTask('default', ['test', 'concat', 'uglify']);
 }
